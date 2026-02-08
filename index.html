@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>For Bebo ❤️</title>
+
+<style>
+  body{
+    margin:0;
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(180deg,#ffe4ec,#fff);
+    overflow:hidden;
+  }
+
+  .card{
+    width:min(560px, 92vw);
+    background: rgba(255,255,255,.95);
+    border-radius: 22px;
+    padding: 30px 24px;
+    text-align:center;
+    box-shadow: 0 15px 35px rgba(0,0,0,.12);
+    position: relative;
+    z-index: 2;
+  }
+
+  h1{
+    margin: 0;
+    font-size: 30px;
+    color:#ff2f6d;
+  }
+
+  .sub{
+    margin: 10px 0 18px;
+    font-size: 15px;
+    color:#444;
+    line-height: 1.6;
+  }
+
+  .memory{
+    font-style: italic;
+    color:#ff4f85;
+    margin-bottom: 18px;
+  }
+
+  .btns{
+    position: relative;
+    height: 120px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 18px;
+  }
+
+  button{
+    border:0;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-size: 16px;
+    cursor:pointer;
+    user-select:none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #yes{
+    background:#ff2f6d;
+    color:white;
+  }
+
+  #no{
+    background:#111;
+    color:white;
+    position:absolute;
+    left: 55%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    transition: transform .08s linear;
+  }
+
+  #msg{
+    margin-top: 18px;
+    font-weight: 600;
+    color:#ff2f6d;
+    min-height: 24px;
+    font-size: 18px;
+  }
+
+  .footer{
+    font-size: 12px;
+    opacity:.6;
+    margin-top: 12px;
+  }
+
+  .heart{
+    position: fixed;
+    font-size: 18px;
+    animation: floatUp linear forwards;
+    pointer-events:none;
+    opacity:.9;
+  }
+
+  @keyframes floatUp{
+    from{ transform: translateY(0) scale(1); opacity:1; }
+    to{ transform: translateY(-120vh) scale(1.6); opacity:0; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Bebo 💖</h1>
+
+  <div class="sub">
+    From the moment our story began,
+    you became my favorite chapter.
+  </div>
+
+  <div class="memory">
+    We chose each other on <b>13th May 2019</b> —
+    and every day since then, I’d still choose you.
+  </div>
+
+  <h2>Will you be my Valentine? 🌹</h2>
+
+  <div class="btns" id="arena">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+
+  <div id="msg"></div>
+
+  <div class="footer">
+    (The “No” button knows it’s not an option 😌)
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const arena = document.getElementById("arena");
+const msg = document.getElementById("msg");
+
+function moveNo() {
+  const arenaRect = arena.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const x = Math.random() * (arenaRect.width - btnRect.width);
+  const y = Math.random() * (arenaRect.height - btnRect.height);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+  noBtn.style.transform = "translate(0,0)";
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("touchstart", e => {
+  e.preventDefault();
+  moveNo();
+}, { passive:false });
+
+yesBtn.addEventListener("click", () => {
+  msg.innerHTML = "I knew it 😭💘<br>You’ll always be my Valentine, Bebo.";
+  for(let i=0;i<60;i++) setTimeout(createHeart, i*60);
+});
+
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.bottom = "-20px";
+  heart.style.animationDuration = (3 + Math.random()*3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(() => { if(Math.random() > 0.5) createHeart(); }, 800);
+
+moveNo();
+</script>
+
+</body>
+</html>
