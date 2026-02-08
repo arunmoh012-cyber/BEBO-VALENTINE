@@ -6,155 +6,253 @@
 <title>For Chaii ❤️</title>
 
 <style>
-body{
-  margin:0;
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background: linear-gradient(180deg,#ffe4ec,#fff); /* default before YES */
-  overflow:hidden;
-  transition: background 0.8s ease;
-}
+<style>
+  :root{
+    --bg1:#070712;
+    --bg2:#0b1020;
+    --card: rgba(255,255,255,.06);
+    --card2: rgba(255,255,255,.10);
+    --text: rgba(255,255,255,.92);
+    --muted: rgba(255,255,255,.68);
+    --accent:#ff3b8a;
+    --accent2:#7c3aed;
+  }
 
-/* Background that appears ONLY after she clicks YES */
-body.yes-bg{
-  background:
-    linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
-    url("bg.jpg") center/cover no-repeat fixed;
-}
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(255,59,138,.18), transparent 60%),
+      radial-gradient(900px 600px at 80% 30%, rgba(124,58,237,.16), transparent 60%),
+      radial-gradient(700px 500px at 50% 90%, rgba(255,255,255,.06), transparent 55%),
+      linear-gradient(180deg, var(--bg1), var(--bg2));
+    overflow:hidden;
+  }
+
+  /* Background that appears ONLY after YES (your image) */
+  body.yes-bg{
+    background:
+      radial-gradient(1000px 700px at 20% 10%, rgba(255,59,138,.18), transparent 60%),
+      radial-gradient(900px 600px at 80% 30%, rgba(124,58,237,.16), transparent 60%),
+      linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
+      url("bg.jpg") center/cover no-repeat fixed;
+  }
+
+  /* subtle animated grain */
+  .grain{
+    position:fixed; inset:-20%;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    opacity:.08;
+    mix-blend-mode: overlay;
+    animation: grainMove 10s linear infinite;
+    pointer-events:none;
+    z-index:0;
+  }
+  @keyframes grainMove{
+    0%{ transform:translate(0,0) rotate(0deg); }
+    100%{ transform:translate(-6%, -8%) rotate(1deg); }
+  }
+
+  /* floating glow blobs */
+  .blob{
+    position:fixed;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    filter: blur(55px);
+    opacity: .28;
+    z-index:0;
+    pointer-events:none;
+    animation: blobFloat 8s ease-in-out infinite alternate;
+  }
+  .blob.one{ left:-180px; top:-180px; background: rgba(255,59,138,.55); }
+  .blob.two{ right:-220px; bottom:-220px; background: rgba(124,58,237,.55); animation-duration: 10s; }
+  @keyframes blobFloat{
+    from{ transform: translate(0,0) scale(1); }
+    to{ transform: translate(40px, 30px) scale(1.06); }
+  }
 
   .card{
-    width:min(560px, 92vw);
-    background: rgba(255,255,255,.95);
-    border-radius: 22px;
-    padding: 30px 24px;
+    width:min(620px, 92vw);
+    background: linear-gradient(180deg, var(--card), rgba(255,255,255,.03));
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 26px;
+    padding: 30px 26px;
     text-align:center;
-    box-shadow: 0 15px 35px rgba(0,0,0,.12);
+    box-shadow: 0 18px 45px rgba(0,0,0,.55);
     position: relative;
     z-index: 2;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.10);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
   }
 
   h1{
-    margin: 0;
-    font-size: 30px;
-    color:#ff2f6d;
+    margin: 16px 0 8px;
+    font-size: 34px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
   }
 
   .sub{
-    margin: 10px 0 18px;
-    font-size: 15px;
-    color:#444;
-    line-height: 1.6;
+    margin: 8px auto 16px;
+    max-width: 520px;
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.7;
   }
 
   .memory{
-    font-style: italic;
-    color:#ff4f85;
-    margin-bottom: 18px;
+    margin: 12px auto 18px;
+    max-width: 520px;
+    font-size: 15px;
+    color: rgba(255,255,255,.78);
+    line-height: 1.7;
+  }
+
+  .memory b{
+    color: rgba(255,255,255,.95);
+  }
+
+  h2{
+    margin: 12px 0 18px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255,255,255,.86);
   }
 
   .btns{
     position: relative;
-    height: 120px;
+    height: 130px;
     display:flex;
     align-items:center;
     justify-content:center;
-    gap: 18px;
+    gap: 16px;
+    margin-top: 8px;
   }
 
   button{
-    border:0;
-    padding: 14px 24px;
+    border: 1px solid rgba(255,255,255,.14);
+    padding: 14px 22px;
     border-radius: 999px;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 600;
     cursor:pointer;
     user-select:none;
     -webkit-tap-highlight-color: transparent;
+    transition: transform .15s ease, filter .15s ease, box-shadow .2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   #yes{
-    background:#ff2f6d;
-    color:white;
+    color: white;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    box-shadow: 0 14px 30px rgba(255,59,138,.18);
   }
+  #yes:hover{ transform: translateY(-1px) scale(1.02); filter: brightness(1.05); }
 
   #no{
-    background:#111;
-    color:white;
+    color: rgba(255,255,255,.9);
+    background: rgba(255,255,255,.06);
     position:absolute;
     left: 55%;
     top: 50%;
     transform: translate(-50%,-50%);
-    transition: transform .08s linear;
   }
 
   #msg{
     margin-top: 18px;
     font-weight: 600;
-    color:#ff2f6d;
-    min-height: 24px;
-    font-size: 18px;
+    color: rgba(255,255,255,.92);
+    min-height: 26px;
+    font-size: 16px;
+    line-height: 1.6;
   }
 
   .footer{
     font-size: 12px;
-    opacity:.6;
-    margin-top: 12px;
+    color: rgba(255,255,255,.55);
+    margin-top: 14px;
   }
 
+  /* hearts */
   .heart{
     position: fixed;
     font-size: 18px;
     animation: floatUp linear forwards;
     pointer-events:none;
-    opacity:.9;
+    opacity:.95;
+    z-index: 3;
+    filter: drop-shadow(0 6px 16px rgba(255,59,138,.25));
   }
-
   @keyframes floatUp{
     from{ transform: translateY(0) scale(1); opacity:1; }
-    to{ transform: translateY(-120vh) scale(1.6); opacity:0; }
+    to{ transform: translateY(-120vh) scale(1.7); opacity:0; }
   }
-.polaroids{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
 
-.polaroid{
-  position: absolute;
-  width: 140px;
-  background: #fff;
-  padding: 10px 10px 28px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-  border-radius: 6px;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 1s ease;
-}
-
-.polaroid img{
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.polaroid.show{
-  opacity: 1;
-  transform: scale(1);
-}
+  /* polaroids layer stays behind card */
+  .polaroids{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .polaroid{
+    position: absolute;
+    width: 165px;
+    background: rgba(255,255,255,.92);
+    padding: 10px 10px 30px;
+    box-shadow: 0 14px 35px rgba(0,0,0,.45);
+    border-radius: 10px;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: all 1s ease;
+  }
+  .polaroid img{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display:block;
+  }
+  .polaroid.show{
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
 </style>
 </head>
 
 <body>
+  <div class="grain"></div>
+<div class="blob one"></div>
+<div class="blob two"></div>
 <div class="polaroids" id="polaroids">
   </div>
   <div class="polaroid" style="bottom:10%; right:16%; transform:rotate(-10deg);">
     <img src="p4.jpg" alt="memory 4">
   </div>
 </div>
-<div class="card">
-  <h1>Hi Love 💖</h1>
+<div class="badge">A private link just for you</div>
+<h1>HI LOVE</h1>
 
 <div class="sub">
   Maybe you feel bored seeing the same person for the 6th Valentine,<br>
