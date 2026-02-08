@@ -165,8 +165,19 @@ noBtn.addEventListener("touchstart", e => {
 }, { passive:false });
 
 yesBtn.addEventListener("click", () => {
-  msg.innerHTML = "I knew it 😭💘<br>You’ll always be my Valentine, Bebo.";
-  for(let i=0;i<60;i++) setTimeout(createHeart, i*60);
+  msg.innerHTML = `
+  I knew it… what other option do you even have? 😌<br><br>
+  You do have choices, but I want you to know this —<br>
+  I really can’t do life without you.<br>
+  You’re my everything.<br><br>
+
+  I know this might seem a little cringe, but I still wanted to do it.<br>
+  I wanted to see you blush… at least a little, when you see this.<br><br>
+
+  I know we usually don’t do this “propose day” thing and all,<br>
+  but still… I can’t wait for the day I ask you out fr. 💖
+  `;
+  for(let i=0;i<80;i++) setTimeout(createHeart, i*50);
 });
 
 function createHeart(){
