@@ -139,7 +139,9 @@
     (The “No” button knows it’s not an option 😌)
   </div>
 </div>
-
+<audio id="loveSong">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 <script>
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
@@ -164,7 +166,11 @@ noBtn.addEventListener("touchstart", e => {
   moveNo();
 }, { passive:false });
 
+const loveSong = document.getElementById("loveSong");
+
 yesBtn.addEventListener("click", () => {
+  loveSong.play();
+
   msg.innerHTML = `
   I knew it… what other option do you even have? 😌<br><br>
   You do have choices, but I want you to know this —<br>
@@ -175,9 +181,10 @@ yesBtn.addEventListener("click", () => {
   I wanted to see you blush… at least a little, when you see this.<br><br>
 
   I know we usually don’t do this “propose day” thing and all,<br>
-  but still… I can’t wait for the day I ask you out fr. 💖
+  but still… I can’t wait for the day I ask you out properly. 💖
   `;
-  for(let i=0;i<80;i++) setTimeout(createHeart, i*50);
+
+  for(let i=0;i<100;i++) setTimeout(createHeart, i*40);
 });
 
 function createHeart(){
