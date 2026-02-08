@@ -114,11 +114,53 @@ body.yes-bg{
     from{ transform: translateY(0) scale(1); opacity:1; }
     to{ transform: translateY(-120vh) scale(1.6); opacity:0; }
   }
+.polaroids{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.polaroid{
+  position: absolute;
+  width: 140px;
+  background: #fff;
+  padding: 10px 10px 28px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  border-radius: 6px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 1s ease;
+}
+
+.polaroid img{
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.polaroid.show{
+  opacity: 1;
+  transform: scale(1);
+}
 </style>
 </head>
 
 <body>
-
+<div class="polaroids" id="polaroids">
+  <div class="polaroid" style="top:8%; left:10%; transform:rotate(-12deg);">
+    <img src="p1.jpg" alt="memory 1">
+  </div>
+  <div class="polaroid" style="top:15%; right:12%; transform:rotate(10deg);">
+    <img src="p2.jpg" alt="memory 2">
+  </div>
+  <div class="polaroid" style="bottom:18%; left:14%; transform:rotate(8deg);">
+    <img src="p3.jpg" alt="memory 3">
+  </div>
+  <div class="polaroid" style="bottom:10%; right:16%; transform:rotate(-10deg);">
+    <img src="p4.jpg" alt="memory 4">
+  </div>
+</div>
 <div class="card">
   <h1>Hi Love 💖</h1>
 
@@ -175,6 +217,9 @@ noBtn.addEventListener("touchstart", e => {
 const loveSong = document.getElementById("loveSong");
 
 yesBtn.addEventListener("click", () => {
+  document.querySelectorAll(".polaroid").forEach((p, i) => {
+  setTimeout(() => p.classList.add("show"), i * 300);
+});
   document.body.classList.add("yes-bg");
   loveSong.play();
 
